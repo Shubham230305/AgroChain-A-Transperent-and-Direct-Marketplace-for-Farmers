@@ -29,9 +29,6 @@ AgroChain uses a multi-layer architecture consisting of:
 ---
 
 ## 📸 Interface Snapshots
-
-## 📸 Screenshots
-
 <table>
   <tr>
     <td align="center">

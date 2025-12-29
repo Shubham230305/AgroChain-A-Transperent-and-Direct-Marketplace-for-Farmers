@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroChain - Farmer Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="farmer-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Side Navigation Menu -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <a href="project-index.html" class="back-btn" title="Back to Project Index" style="margin-right: 10px;">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <i class="fas fa-seedling"></i>
+                    <span>AgroChain</span>
+                </div>
+                <button class="close-btn" id="closeSidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="sidebar-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMzAiIGZpbGw9IiM0Q0FGNTIiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIyNSIgcj0iMTAiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNSA0NUg0NVYzOEM0NSAzNSA0MyAzMyA0MCAzM0gyMEMxNyAzMyAxNSAzNSAxNSAzOFY0NVoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=" alt="Farmer Profile" class="profile-img">
+                <h3>Ramesh Patil</h3>
+                <p>Premium Farmer</p>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Help & Support</a></li>
+                <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Enhanced Top Bar -->
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Farmer Dashboard</h1>
+                </div>
+                
+                <div class="top-bar-center">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search crops, buyers, prices...">
+                    </div>
+                </div>
+                
+                <div class="top-bar-right">
+                    <!-- Notifications -->
+                    <div class="notification-container">
+                        <button class="notification-btn" id="notificationBtn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">5</span>
+                        </button>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notification-header">
+                                <h4>Notifications</h4>
+                                <button class="mark-all-read">Mark all read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <i class="fas fa-gavel notification-icon"></i>
+                                    <div class="notification-content">
+                                        <p><strong>New Bid:</strong> ₹45/kg for your wheat</p>
+                                        <span class="notification-time">2 min ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <i class="fas fa-rupee-sign notification-icon"></i>
+                                    <div class="notification-content">
+                                        <p><strong>Payment Received:</strong> ₹5,000 for rice order</p>
+                                        <span class="notification-time">1 hour ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <i class="fas fa-chart-line notification-icon"></i>
+                                    <div class="notification-content">
+                                        <p><strong>Price Alert:</strong> Tomato prices increased by 15%</p>
+                                        <span class="notification-time">3 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item">
+                                    <i class="fas fa-user notification-icon"></i>
+                                    <div class="notification-content">
+                                        <p><strong>New Buyer:</strong> Interested in your organic vegetables</p>
+                                        <span class="notification-time">5 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Wallet Balance -->
+                    <div class="wallet-info">
+                        <i class="fas fa-wallet"></i>
+                        <div class="wallet-details">
+                            <span class="wallet-label">Wallet Balance</span>
+                            <span class="wallet-amount">₹25,750</span>
+                        </div>
+                    </div>
+                    
+                    <!-- User Profile -->
+                    <div class="user-profile">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Q0FGNTIiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNSIgcj0iNiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEwIDMwSDMwVjI1QzMwIDIyIDI4IDIwIDI1IDIwSDE1QzEyIDIwIDEwIDIyIDEwIDI1VjMwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==" alt="राम पाटील" class="user-avatar">
+                        <div class="user-info">
+                            <span class="user-name">राम पाटील</span>
+                            <span class="user-role">कृषी उत्पादक</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Main Action Cards -->
+                <div class="action-cards-grid">
+                    <div class="action-card" onclick="showListCropModal()">
+                        <div class="card-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>List Crop for Sale</h3>
+                        <p>Add your crops to the marketplace</p>
+                        <div class="card-stats">
+                            <span>5 Active Listings</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card" onclick="showMarketPrices()">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Check Market Prices</h3>
+                        <p>AI-powered price forecasts</p>
+                        <div class="card-stats">
+                            <span>Updated 2 min ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card" onclick="showBuyers()">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>View Buyers</h3>
+                        <p>Connect with potential buyers</p>
+                        <div class="card-stats">
+                            <span>8 Active Buyers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="action-card" onclick="showOrders()">
+                        <div class="card-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Track Orders/Payments</h3>
+                        <p>Monitor your transactions</p>
+                        <div class="card-stats">
+                            <span>3 Pending Orders</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Price Forecast Section -->
+                <div class="market-prices-section" id="marketPricesSection" style="display: none;">
+                    <div class="section-header">
+                        <h2><i class="fas fa-brain"></i> AI Market Price Forecast</h2>
+                        <button class="close-section" onclick="hideMarketPrices()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="price-forecast-grid">
+                        <div class="forecast-card">
+                            <div class="crop-info">
+                                <i class="fas fa-wheat crop-icon"></i>
+                                <div>
+                                    <h4>Wheat</h4>
+                                    <span class="current-price">₹24.50/kg</span>
+                                </div>
+                            </div>
+                            <div class="price-trend">
+                                <canvas id="wheatChart" width="200" height="100"></canvas>
+                            </div>
+                            <div class="forecast-prediction">
+                                <span class="prediction positive">
+                                    <i class="fas fa-arrow-up"></i> +5.2% next week
+                                </span>
+                                <small>AI Confidence: 85%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="forecast-card">
+                            <div class="crop-info">
+                                <i class="fas fa-seedling crop-icon"></i>
+                                <div>
+                                    <h4>Rice</h4>
+                                    <span class="current-price">₹32.80/kg</span>
+                                </div>
+                            </div>
+                            <div class="price-trend">
+                                <canvas id="riceChart" width="200" height="100"></canvas>
+                            </div>
+                            <div class="forecast-prediction">
+                                <span class="prediction negative">
+                                    <i class="fas fa-arrow-down"></i> -2.1% next week
+                                </span>
+                                <small>AI Confidence: 78%</small>
+                            </div>
+                        </div>
+                        
+                        <div class="forecast-card">
+                            <div class="crop-info">
+                                <i class="fas fa-carrot crop-icon"></i>
+                                <div>
+                                    <h4>Tomato</h4>
+                                    <span class="current-price">₹18.90/kg</span>
+                                </div>
+                            </div>
+                            <div class="price-trend">
+                                <canvas id="tomatoChart" width="200" height="100"></canvas>
+                            </div>
+                            <div class="forecast-prediction">
+                                <span class="prediction positive">
+                                    <i class="fas fa-arrow-up"></i> +8.7% next week
+                                </span>
+                                <small>AI Confidence: 92%</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats and Recent Activity -->
+                <div class="dashboard-grid">
+                    <div class="stats-section">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>Total Crops</h4>
+                                    <span class="stat-number">12</span>
+                                    <small>+2 this month</small>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-rupee-sign"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>Total Earnings</h4>
+                                    <span class="stat-number">₹1,25,750</span>
+                                    <small>+15% this month</small>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h4>Active Buyers</h4>
+                                    <span class="stat-number">23</span>
+                                    <small>+5 this week</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>Order Completed</h4>
+                                    <p>Wheat sold to Rajesh Kumar - ₹5,000</p>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon info">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>New Bid Received</h4>
+                                    <p>₹45/kg for your organic rice</p>
+                                    <span class="activity-time">5 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon warning">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <h4>New Crop Listed</h4>
+                                    <p>Organic Tomatoes - ₹40/kg</p>
+                                    <span class="activity-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- List Crop Modal -->
+    <div id="listCropModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>List Crop for Sale</h3>
+                <button class="close-modal" onclick="closeListCropModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="listCropForm">
+                <div class="form-group">
+                    <label>Crop Type</label>
+                    <select required>
+                        <option value="">Select Crop</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="rice">Rice</option>
+                        <option value="tomato">Tomato</option>
+                        <option value="onion">Onion</option>
+                        <option value="potato">Potato</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Quantity (kg)</label>
+                    <input type="number" placeholder="Enter quantity" required>
+                </div>
+                <div class="form-group">
+                    <label>Expected Price (₹/kg)</label>
+                    <input type="number" placeholder="Enter price per kg" required>
+                </div>
+                <div class="form-group">
+                    <label>Quality Grade</label>
+                    <select required>
+                        <option value="">Select Grade</option>
+                        <option value="premium">Premium</option>
+                        <option value="good">Good</option>
+                        <option value="average">Average</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeListCropModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">List Crop</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="farmer-dashboard.js"></script>
+</body>
+</html>

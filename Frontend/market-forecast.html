@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>बाजार भाव अंदाज - AgroChain AI</title>
+    <link rel="stylesheet" href="market-forecast.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="back-btn" onclick="goBack()">←</button>
+                <a href="project-index.html" class="back-btn" title="Back to Project Index" style="margin-right: 10px;">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <h1 class="nav-title">AI बाजार भाव अंदाज</h1>
+            </div>
+            <div class="nav-right">
+                <div class="ai-indicator">
+                    <span class="ai-dot"></span>
+                    <span class="ai-text">AI सक्रिय</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Q0FGNTIiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xMiA4QzEzLjEgOCAxNCA3LjEgMTQgNkMxNCA0LjkgMTMuMSA0IDEyIDRDMTAuOSA0IDEwIDQuOSAxMCA2QzEwIDcuMSAxMC45IDggMTIgOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjEzIDE0IDUgMTYuMTMgNSAyMEg3QzcgMTcuMjQgOS4yNCAxNSAxMiAxNUMxNC43NiAxNSAxNyAxNy4yNCAxNyAyMEgxOUMxOSAxNi4xMyAxNS44NyAxNCAxMiAxNFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo8L3N2Zz4K" alt="Profile" class="profile-img">
+                    <span class="user-name">राहुल पाटील</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="header-content">
+                <h2 class="main-title">AI-समर्थित बाजार भविष्यवाणी</h2>
+                <p class="subtitle">मशीन लर्निंगद्वारे अचूक भाव अंदाज आणि विक्रीचा योग्य काळ शोधा</p>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <div class="crop-selector">
+                <label class="selector-label">पिक निवडा:</label>
+                <select id="cropSelector" class="crop-dropdown">
+                    <option value="wheat">गहू (Wheat)</option>
+                    <option value="rice">तांदूळ (Rice)</option>
+                    <option value="tomato">टोमॅटो (Tomato)</option>
+                    <option value="potato">बटाटा (Potato)</option>
+                    <option value="onion">कांदा (Onion)</option>
+                    <option value="cabbage">कोबी (Cabbage)</option>
+                    <option value="cauliflower">फ्लॉवर (Cauliflower)</option>
+                    <option value="brinjal">वांगे (Brinjal)</option>
+                    <option value="spinach">पालक (Spinach)</option>
+                    <option value="carrot">गाजर (Carrot)</option>
+                    <option value="radish">मुळा (Radish)</option>
+                    <option value="bitter-gourd">कारले (Bitter Gourd)</option>
+                    <option value="bottle-gourd">दुधी भोपळा (Bottle Gourd)</option>
+                    <option value="okra">भेंडी (Okra)</option>
+                    <option value="chili">मिरची (Chili)</option>
+                    <option value="coriander">कोथिंबीर (Coriander)</option>
+                    <option value="apple">सफरचंद (Apple)</option>
+                    <option value="banana">केळे (Banana)</option>
+                    <option value="mango">आंबा (Mango)</option>
+                    <option value="orange">संत्री (Orange)</option>
+                </select>
+            </div>
+
+            <div class="time-range-selector">
+                <label class="selector-label">कालावधी:</label>
+                <div class="time-buttons">
+                    <button class="time-btn active" data-range="7d">७ दिवस</button>
+                    <button class="time-btn" data-range="1m">१ महिना</button>
+                    <button class="time-btn" data-range="3m">३ महिने</button>
+                    <button class="time-btn" data-range="6m">६ महिने</button>
+                    <button class="time-btn" data-range="1y">१ वर्ष</button>
+                </div>
+            </div>
+
+            <button class="refresh-btn" id="refreshData">
+                <span class="refresh-icon">🔄</span>
+                डेटा रिफ्रेश
+            </button>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard-grid">
+            <!-- Price Chart Section -->
+            <div class="chart-section">
+                <div class="section-header">
+                    <h3 class="section-title">भाव चलन व भविष्यवाणी</h3>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-color current"></span>
+                            <span>सध्याचा भाव</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color predicted"></span>
+                            <span>AI अंदाज</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color confidence"></span>
+                            <span>विश्वासार्हता</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="priceChart"></canvas>
+                </div>
+                <div class="chart-controls">
+                    <button class="chart-btn active" data-type="price">किंमत (₹)</button>
+                    <button class="chart-btn" data-type="trend">ट्रेंड (%)</button>
+                    <button class="chart-btn" data-type="volume">व्हॉल्यूम</button>
+                </div>
+            </div>
+
+            <!-- AI Recommendations -->
+            <div class="recommendations-section">
+                <div class="section-header">
+                    <h3 class="section-title">AI शिफारसी</h3>
+                    <div class="ai-confidence">
+                        <span class="confidence-label">विश्वासार्हता:</span>
+                        <span class="confidence-value" id="confidenceValue">92%</span>
+                    </div>
+                </div>
+
+                <!-- Best Time to Sell -->
+                <div class="recommendation-card best-time">
+                    <div class="card-icon">🎯</div>
+                    <div class="card-content">
+                        <h4 class="card-title">विक्रीसाठी योग्य काळ</h4>
+                        <div class="best-time-info">
+                            <div class="time-period">
+                                <span class="time-label">सर्वोत्तम काळ:</span>
+                                <span class="time-value" id="bestTimePeriod">पुढील ३-५ दिवस</span>
+                            </div>
+                            <div class="expected-price">
+                                <span class="price-label">अपेक्षित भाव:</span>
+                                <span class="price-value" id="expectedPrice">₹२५-२८/किलो</span>
+                            </div>
+                        </div>
+                        <div class="confidence-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="meter-text">८५% खात्री</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market Trends -->
+                <div class="recommendation-card market-trend">
+                    <div class="card-icon">📈</div>
+                    <div class="card-content">
+                        <h4 class="card-title">बाजार ट्रेंड</h4>
+                        <div class="trend-info">
+                            <div class="trend-direction">
+                                <span class="trend-arrow up">↗️</span>
+                                <span class="trend-text">सकारात्मक ट्रेंड</span>
+                            </div>
+                            <div class="trend-details">
+                                <span class="trend-change positive">+१२.५%</span>
+                                <span class="trend-period">गेल्या १५ दिवसांत</span>
+                            </div>
+                        </div>
+                        <div class="trend-analysis">
+                            <p>मागणी वाढत आहे. पुरवठा स्थिर आहे. भाव वाढण्याची शक्यता.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Assessment -->
+                <div class="recommendation-card risk-assessment">
+                    <div class="card-icon">⚠️</div>
+                    <div class="card-content">
+                        <h4 class="card-title">जोखीम आकलन</h4>
+                        <div class="risk-level low">
+                            <span class="risk-label">जोखीम स्तर:</span>
+                            <span class="risk-value">कमी</span>
+                        </div>
+                        <div class="risk-factors">
+                            <div class="factor">
+                                <span class="factor-name">हवामान जोखीम:</span>
+                                <span class="factor-status good">कमी</span>
+                            </div>
+                            <div class="factor">
+                                <span class="factor-name">मार्केट अस्थिरता:</span>
+                                <span class="factor-status moderate">मध्यम</span>
+                            </div>
+                        </div>
+                        <div class="risk-recommendation">
+                            <p>सध्याच्या परिस्थितीत विक्री सुरक्षित आहे.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seasonal Insights -->
+                <div class="recommendation-card seasonal-insights">
+                    <div class="card-icon">🌾</div>
+                    <div class="card-content">
+                        <h4 class="card-title">हंगामी विश्लेषण</h4>
+                        <div class="seasonal-info">
+                            <div class="current-season">
+                                <span class="season-label">सध्याचा हंगाम:</span>
+                                <span class="season-value">हिवाळा</span>
+                            </div>
+                            <div class="seasonal-impact">
+                                <span class="impact-label">हंगामी परिणाम:</span>
+                                <span class="impact-value positive">सकारात्मक</span>
+                            </div>
+                        </div>
+                        <div class="seasonal-prediction">
+                            <p>हिवाळ्यामध्ये या पिकाची मागणी सामान्यतः वाढते. भाव वाढण्याची ७५% शक्यता.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            <button class="get-advice-btn" id="getAdviceBtn">
+                <span class="btn-icon">🤖</span>
+                <span class="btn-text">AI सल्ला मिळवा</span>
+                <span class="btn-subtext">वैयक्तिकृत शिफारसी</span>
+            </button>
+
+            <div class="quick-actions">
+                <button class="quick-btn" id="setAlertBtn">
+                    <span class="quick-icon">🔔</span>
+                    <span class="quick-text">भाव अलर्ट सेट करा</span>
+                </button>
+                <button class="quick-btn" id="compareCropsBtn">
+                    <span class="quick-icon">📊</span>
+                    <span class="quick-text">पिकांची तुलना करा</span>
+                </button>
+                <button class="quick-btn" id="exportDataBtn">
+                    <span class="quick-icon">📥</span>
+                    <span class="quick-text">डेटा एक्सपोर्ट करा</span>
+                </button>
+                <button class="quick-btn" id="shareForecastBtn">
+                    <span class="quick-icon">📤</span>
+                    <span class="quick-text">अंदाज शेअर करा</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Market Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-header">
+                    <h4>सरासरी भाव</h4>
+                    <span class="card-icon">💰</span>
+                </div>
+                <div class="card-value" id="avgPrice">₹२५.५०</div>
+                <div class="card-change positive">+₹२.३० (+९.९%)</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-header">
+                    <h4>मागील आठवडा</h4>
+                    <span class="card-icon">📅</span>
+                </div>
+                <div class="card-value" id="weeklyChange">+१२.५%</div>
+                <div class="card-change positive">सकारात्मक बदल</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-header">
+                    <h4>मागणी सूचकांक</h4>
+                    <span class="card-icon">📈</span>
+                </div>
+                <div class="card-value" id="demandIndex">७८/१००</div>
+                <div class="card-change moderate">मध्यम मागणी</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="card-header">
+                    <h4>AI अचूकता</h4>
+                    <span class="card-icon">🎯</span>
+                </div>
+                <div class="card-value" id="aiAccuracy">९२%</div>
+                <div class="card-change good">उच्च अचूकता</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Advice Modal -->
+    <div class="modal" id="aiAdviceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🤖 AI सल्ला</h3>
+                <button class="close-btn" id="closeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="advice-section">
+                    <h4>📊 बाजार विश्लेषण</h4>
+                    <p>तुमच्या निवडलेल्या पिकाचा बाजार विश्लेषण AI अल्गोरिदमने केला आहे. सध्याच्या ट्रेंडनुसार, भाव वाढण्याची ८५% शक्यता आहे.</p>
+                </div>
+
+                <div class="advice-section">
+                    <h4>💰 विक्री रणनीती</h4>
+                    <ul>
+                        <li>पुढील ३-५ दिवस वाट पाहा - भाव वाढण्याची शक्यता</li>
+                        <li>५०% पिक आत्ता विका, उरलेले ५०% वाट पाहा</li>
+                        <li>स्थानिक बाजारात थेट विक्रीचा विचार करा</li>
+                    </ul>
+                </div>
+
+                <div class="advice-section">
+                    <h4>⚠️ जोखीम सूचना</h4>
+                    <p>हवामान बदलामुळे किंमतीत अचानक बदल होऊ शकतो. दररोज भाव तपासत राहा.</p>
+                </div>
+
+                <div class="advice-confidence">
+                    <div class="confidence-meter">
+                        <div class="meter-fill" style="width: 85%"></div>
+                    </div>
+                    <span>या सल्ल्यावर ८५% विश्वास आहे</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="saveAdviceBtn">सल्ला जतन करा</button>
+                <button class="btn btn-primary" id="applyAdviceBtn">सल्ला अमलात आणा</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Alert Modal -->
+    <div class="modal" id="priceAlertModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔔 भाव अलर्ट सेट करा</h3>
+                <button class="close-btn" id="closeAlertModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="alertForm">
+                    <div class="form-group">
+                        <label>अलर्ट प्रकार:</label>
+                        <select id="alertType" class="form-select">
+                            <option value="above">वरची मर्यादा</option>
+                            <option value="below">खालची मर्यादा</option>
+                            <option value="range">किंमत रेंज</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>किंमत (₹/किलो):</label>
+                        <input type="number" id="alertPrice" class="form-input" placeholder="उदा: 30" min="1" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>सूचना मार्ग:</label>
+                        <div class="notification-options">
+                            <label><input type="checkbox" checked> एसएमएस</label>
+                            <label><input type="checkbox" checked> व्हॉट्सॲप</label>
+                            <label><input type="checkbox"> ईमेल</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelAlertBtn">रद्द करा</button>
+                <button class="btn btn-primary" id="setAlertBtn">अलर्ट सेट करा</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon" id="toastIcon"></span>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>AI डेटा विश्लेषण करत आहे...</p>
+        </div>
+    </div>
+
+    <script src="market-forecast.js"></script>
+</body>
+</html>

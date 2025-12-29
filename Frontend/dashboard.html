@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroChain Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                    <h1>AgroChain Dashboard</h1>
+                </div>
+                <div class="user-info">
+                    <span>Welcome, Farmer!</span>
+                    <button onclick="logout()" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div class="welcome-section">
+                <h2>Welcome to Your Agricultural Marketplace!</h2>
+                <p>Manage your crops, connect with buyers, and grow your business.</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-seedling stat-icon"></i>
+                    <div class="stat-info">
+                        <h3>My Crops</h3>
+                        <p>5 Active Listings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-shopping-cart stat-icon"></i>
+                    <div class="stat-info">
+                        <h3>Orders</h3>
+                        <p>12 This Month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-rupee-sign stat-icon"></i>
+                    <div class="stat-info">
+                        <h3>Earnings</h3>
+                        <p>₹25,000 This Month</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users stat-icon"></i>
+                    <div class="stat-info">
+                        <h3>Buyers</h3>
+                        <p>8 Active Connections</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="actions-section">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn">
+                        <i class="fas fa-plus"></i>
+                        Add New Crop
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-search"></i>
+                        Find Buyers
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-chart-line"></i>
+                        View Market Prices
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-truck"></i>
+                        Manage Deliveries
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="activity-section">
+                <h3>Recent Activity</h3>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <i class="fas fa-check-circle activity-icon success"></i>
+                        <div class="activity-content">
+                            <h4>Order Completed</h4>
+                            <p>Wheat sold to Rajesh Kumar - ₹5,000</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <i class="fas fa-shopping-cart activity-icon info"></i>
+                        <div class="activity-content">
+                            <h4>New Order</h4>
+                            <p>Rice order from Priya Sharma - ₹3,500</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <i class="fas fa-seedling activity-icon warning"></i>
+                        <div class="activity-content">
+                            <h4>New Crop Listed</h4>
+                            <p>Organic Tomatoes - ₹40/kg</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function logout() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

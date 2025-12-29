@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroChain - Unified Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="main-dashboard.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                <span>AgroChain</span>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="sidebar-menu">
+            <div class="menu-section">
+                <h3>Main Modules</h3>
+                <ul class="menu-items">
+                    <li class="menu-item active" data-module="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </li>
+                    <li class="menu-item" data-module="crop-listing">
+                        <i class="fas fa-leaf"></i>
+                        <span>Crop Listing</span>
+                    </li>
+                    <li class="menu-item" data-module="blockchain-payments">
+                        <i class="fas fa-coins"></i>
+                        <span>Blockchain Payments</span>
+                    </li>
+                    <li class="menu-item" data-module="iot-traceability">
+                        <i class="fas fa-microchip"></i>
+                        <span>IoT Traceability</span>
+                    </li>
+                    <li class="menu-item" data-module="market-forecast">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Market Forecast</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="menu-section">
+                <h3>Advanced Features</h3>
+                <ul class="menu-items">
+                    <li class="menu-item" data-module="cooperative-marketplace">
+                        <i class="fas fa-handshake"></i>
+                        <span>Cooperative Marketplace</span>
+                    </li>
+                    <li class="menu-item" data-module="analytics-reports">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics & Reports</span>
+                    </li>
+                    <li class="menu-item" data-module="support-feedback">
+                        <i class="fas fa-headset"></i>
+                        <span>Support & Feedback</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name">Farm Owner</span>
+                    <span class="user-role">Premium User</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <div class="header-back">
+                    <a href="project-index.html" class="back-btn" title="Back to Project Index">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+                <h1 id="currentModuleTitle">AgroChain Dashboard</h1>
+                <div class="breadcrumb" id="breadcrumb">
+                    <span>Home</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Dashboard</span>
+                </div>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search modules, crops, or features..." id="globalSearch">
+                </div>
+                
+                <div class="header-actions">
+                    <button class="notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    
+                    <button class="quick-actions-btn" id="quickActionsBtn">
+                        <i class="fas fa-th"></i>
+                    </button>
+                    
+                    <div class="theme-toggle">
+                        <input type="checkbox" id="themeToggle">
+                        <label for="themeToggle">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </label>
+                    </div>
+                    
+                    <button class="logout-btn" id="logoutBtn" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Module Container -->
+        <div class="module-container" id="moduleContainer">
+            <!-- Dashboard Overview -->
+            <div class="module-content active" id="dashboard-module">
+                <div class="dashboard-grid">
+                    <!-- Quick Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>24</h3>
+                                <p>Active Crops</p>
+                                <span class="stat-change positive">+12%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>₹2.4L</h3>
+                                <p>Total Revenue</p>
+                                <span class="stat-change positive">+8%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>156</h3>
+                                <p>Transactions</p>
+                                <span class="stat-change positive">+15%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>4.8</h3>
+                                <p>User Rating</p>
+                                <span class="stat-change positive">+0.2</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Module Overview Cards -->
+                    <div class="module-cards">
+                        <div class="module-card" data-module="crop-listing">
+                            <div class="card-header">
+                                <i class="fas fa-seedling card-icon"></i>
+                                <h3>Crop Listing</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>Manage and list your crops for sale</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>12</strong> Active Listings
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>₹45,000</strong> Total Value
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span class="progress-text">75% Inventory Listed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="blockchain-payments">
+                            <div class="card-header">
+                                <i class="fas fa-coins card-icon"></i>
+                                <h3>Blockchain Payments</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>Secure payment processing with blockchain</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>₹1,25,000</strong> Processed
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>8</strong> Transactions
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span class="progress-text">90% Payment Success Rate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="iot-traceability">
+                            <div class="card-header">
+                                <i class="fas fa-microchip card-icon"></i>
+                                <h3>IoT Traceability</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>Track crops with IoT sensor data</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>15</strong> Sensors Active
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>98%</strong> Uptime
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 98%"></div>
+                                    </div>
+                                    <span class="progress-text">98% System Reliability</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="market-forecast">
+                            <div class="card-header">
+                                <i class="fas fa-chart-line card-icon"></i>
+                                <h3>Market Forecast</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>AI-powered market insights and predictions</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>+12%</strong> Wheat Price
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>High</strong> Demand
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-text">85% Prediction Accuracy</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="cooperative-marketplace">
+                            <div class="card-header">
+                                <i class="fas fa-handshake card-icon"></i>
+                                <h3>Cooperative Marketplace</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>Join farmer cooperatives and collaborate</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>3</strong> Cooperatives
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>47</strong> Members
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                    </div>
+                                    <span class="progress-text">60% Member Engagement</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="analytics-reports">
+                            <div class="card-header">
+                                <i class="fas fa-chart-bar card-icon"></i>
+                                <h3>Analytics & Reports</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>Comprehensive analytics and reporting</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>24</strong> Reports
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>₹2,50,000</strong> Revenue
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 92%"></div>
+                                    </div>
+                                    <span class="progress-text">92% Data Completeness</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="module-card" data-module="support-feedback">
+                            <div class="card-header">
+                                <i class="fas fa-headset card-icon"></i>
+                                <h3>Support & Feedback</h3>
+                                <button class="module-btn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <p>Get help and provide feedback</p>
+                                <div class="card-stats">
+                                    <span class="stat-item">
+                                        <strong>24/7</strong> Support
+                                    </span>
+                                    <span class="stat-item">
+                                        <strong>4.8/5</strong> Rating
+                                    </span>
+                                </div>
+                                <div class="card-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 96%"></div>
+                                    </div>
+                                    <span class="progress-text">96% Customer Satisfaction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="action-btn primary" onclick="quickAction('add-crop')">
+                                <i class="fas fa-plus"></i>
+                                <span>Add New Crop</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="quickAction('view-reports')">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>View Reports</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="quickAction('market-insights')">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Market Insights</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="quickAction('payment-history')">
+                                <i class="fas fa-coins"></i>
+                                <span>Payment History</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="quickAction('trace-crop')">
+                                <i class="fas fa-search"></i>
+                                <span>Trace Crop</span>
+                            </button>
+                            <button class="action-btn secondary" onclick="quickAction('cooperative')">
+                                <i class="fas fa-handshake"></i>
+                                <span>Join Cooperative</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module iframes will be loaded here -->
+            <div class="module-iframe-container" id="moduleIframeContainer">
+                <!-- Module content will be loaded via iframe -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Quick Actions Panel -->
+    <div class="quick-actions-panel" id="quickActionsPanel">
+        <div class="panel-header">
+            <h3>Quick Actions</h3>
+            <button class="close-panel" id="closeQuickActions">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <div class="quick-action-grid">
+                <button class="quick-action-item">
+                    <i class="fas fa-leaf"></i>
+                    <span>List Crop</span>
+                </button>
+                <button class="quick-action-item">
+                    <i class="fas fa-handshake"></i>
+                    <span>Join Cooperative</span>
+                </button>
+                <button class="quick-action-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>View Reports</span>
+                </button>
+                <button class="quick-action-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notificationsPanel">
+        <div class="panel-header">
+            <h3>Notifications</h3>
+            <button class="close-panel" id="closeNotifications">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="panel-content">
+            <div class="notification-list">
+                <div class="notification-item unread">
+                    <div class="notification-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>New Crop Listed</h4>
+                        <p>Your wheat crop has been successfully listed</p>
+                        <span class="notification-time">2 minutes ago</span>
+                    </div>
+                </div>
+                <div class="notification-item unread">
+                    <div class="notification-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>Payment Received</h4>
+                        <p>₹15,000 received for rice transaction</p>
+                        <span class="notification-time">1 hour ago</span>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h4>Cooperative Update</h4>
+                        <p>New member joined your cooperative</p>
+                        <span class="notification-time">3 hours ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading module...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="main-dashboard.js"></script>
+</body>
+</html>

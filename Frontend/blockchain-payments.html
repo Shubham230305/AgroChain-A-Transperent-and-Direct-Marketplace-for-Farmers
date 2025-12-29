@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ब्लॉकचेन पेमेंट्स - AgroChain</title>
+    <link rel="stylesheet" href="blockchain-payments.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="project-index.html" class="back-btn" title="Back to Project Index" style="margin-right: 15px;">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <i class="fas fa-coins"></i>
+                <span>AgroChain पेमेंट्स</span>
+            </div>
+            <div class="nav-menu">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    डॅशबोर्ड
+                </a>
+                <a href="buyer-dashboard.html" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    खरेदी
+                </a>
+                <a href="farmer-dashboard.html" class="nav-link">
+                    <i class="fas fa-seedling"></i>
+                    शेती
+                </a>
+                <div class="nav-profile">
+                    <div class="profile-info">
+                        <span class="profile-name">रोहन लांडगे</span>
+                        <span class="profile-role">शेतकरी</span>
+                    </div>
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Wallet Overview Section -->
+        <section class="wallet-section">
+            <div class="wallet-header">
+                <h2><i class="fas fa-wallet"></i> माझे ब्लॉकचेन वॉलेट</h2>
+                <button class="refresh-btn" id="refreshWallet">
+                    <i class="fas fa-sync-alt"></i>
+                    रिफ्रेश
+                </button>
+            </div>
+            
+            <div class="wallet-grid">
+                <!-- Main Balance Card -->
+                <div class="balance-card primary">
+                    <div class="card-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>एकूण शिल्लक</h3>
+                        <div class="balance-amount" id="totalBalance">₹45,250.00</div>
+                        <div class="balance-crypto">
+                            <span id="cryptoBalance">0.0234 BTC</span>
+                            <span class="crypto-value">≈ ₹1,89,450</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-btn primary" id="addFundsBtn">
+                            <i class="fas fa-plus"></i>
+                            फंड जोडा
+                        </button>
+                        <button class="action-btn secondary" id="withdrawBtn">
+                            <i class="fas fa-minus"></i>
+                            पैसे काढा
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Escrow Balance Card -->
+                <div class="balance-card escrow">
+                    <div class="card-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>एस्क्रो शिल्लक</h3>
+                        <div class="balance-amount" id="escrowBalance">₹12,500.00</div>
+                        <div class="balance-info">
+                            <span>५ व्यवहार लॉक</span>
+                            <span class="info-icon" title="एस्क्रो म्हणजे सुरक्षित व्यवहारासाठी लॉक केलेले पैसे">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-btn escrow" id="viewEscrowBtn">
+                            <i class="fas fa-eye"></i>
+                            पहा
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Available Balance Card -->
+                <div class="balance-card available">
+                    <div class="card-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>उपलब्ध शिल्लक</h3>
+                        <div class="balance-amount" id="availableBalance">₹32,750.00</div>
+                        <div class="balance-info">
+                            <span>वापरण्यासाठी तयार</span>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="action-btn success" id="quickPayBtn">
+                            <i class="fas fa-bolt"></i>
+                            झटपट पे
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transaction History Section -->
+        <section class="transactions-section">
+            <div class="section-header">
+                <h2><i class="fas fa-history"></i> व्यवहार इतिहास</h2>
+                <div class="section-controls">
+                    <select id="transactionFilter" class="filter-select">
+                        <option value="all">सर्व व्यवहार</option>
+                        <option value="pending">प्रलंबित</option>
+                        <option value="completed">पूर्ण</option>
+                        <option value="released">मुक्त</option>
+                        <option value="failed">अयशस्वी</option>
+                    </select>
+                    <button class="filter-btn" id="exportTransactions">
+                        <i class="fas fa-download"></i>
+                        एक्सपोर्ट
+                    </button>
+                </div>
+            </div>
+
+            <div class="transactions-container">
+                <div class="transaction-list" id="transactionList">
+                    <!-- Sample Transaction 1 - Pending -->
+                    <div class="transaction-item pending" data-status="pending">
+                        <div class="transaction-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-header">
+                                <h4>टोमॅटो खरेदी - शेतकरी राजेश पाटील</h4>
+                                <span class="transaction-amount positive">+₹2,500.00</span>
+                            </div>
+                            <div class="transaction-info">
+                                <span class="transaction-date">२५ नोव्हेंबर २०२४</span>
+                                <span class="transaction-time">०२:३० PM</span>
+                                <span class="transaction-type">खरेदी</span>
+                            </div>
+                            <div class="transaction-status">
+                                <span class="status-badge pending">
+                                    <i class="fas fa-clock"></i>
+                                    प्रलंबित
+                                </span>
+                                <button class="action-btn small pay-btn" data-transaction-id="TXN001">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    पे करा
+                                </button>
+                            </div>
+                        </div>
+                        <div class="transaction-hash">
+                            <span class="hash-label">ब्लॉकचेन हॅश:</span>
+                            <div class="hash-container">
+                                <code class="hash-text">0x7f3a8b9c2d1e4f5a6b7c8d9e0f1a2b3c4d5e6f7</code>
+                                <button class="copy-btn" data-hash="0x7f3a8b9c2d1e4f5a6b7c8d9e0f1a2b3c4d5e6f7">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Transaction 2 - Completed -->
+                    <div class="transaction-item completed" data-status="completed">
+                        <div class="transaction-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-header">
+                                <h4>गहू विक्री - अनिल शर्मा</h4>
+                                <span class="transaction-amount positive">+₹15,000.00</span>
+                            </div>
+                            <div class="transaction-info">
+                                <span class="transaction-date">२४ नोव्हेंबर २०२४</span>
+                                <span class="transaction-time">११:१५ AM</span>
+                                <span class="transaction-type">विक्री</span>
+                            </div>
+                            <div class="transaction-status">
+                                <span class="status-badge completed">
+                                    <i class="fas fa-check-circle"></i>
+                                    पूर्ण
+                                </span>
+                                <button class="action-btn small release-btn" data-transaction-id="TXN002">
+                                    <i class="fas fa-unlock"></i>
+                                    मुक्त करा
+                                </button>
+                            </div>
+                        </div>
+                        <div class="transaction-hash">
+                            <span class="hash-label">ब्लॉकचेन हॅश:</span>
+                            <div class="hash-container">
+                                <code class="hash-text">0x9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0</code>
+                                <button class="copy-btn" data-hash="0x9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Transaction 3 - Released -->
+                    <div class="transaction-item released" data-status="released">
+                        <div class="transaction-icon">
+                            <i class="fas fa-unlock"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-header">
+                                <h4>भेंडी विक्री - सुरेश देशमुख</h4>
+                                <span class="transaction-amount positive">+₹3,200.00</span>
+                            </div>
+                            <div class="transaction-info">
+                                <span class="transaction-date">२३ नोव्हेंबर २०२४</span>
+                                <span class="transaction-time">०४:४५ PM</span>
+                                <span class="transaction-type">विक्री</span>
+                            </div>
+                            <div class="transaction-status">
+                                <span class="status-badge released">
+                                    <i class="fas fa-unlock"></i>
+                                    मुक्त
+                                </span>
+                                <button class="action-btn small withdraw-btn" data-transaction-id="TXN003">
+                                    <i class="fas fa-download"></i>
+                                    काढा
+                                </button>
+                            </div>
+                        </div>
+                        <div class="transaction-hash">
+                            <span class="hash-label">ब्लॉकचेन हॅश:</span>
+                            <div class="hash-container">
+                                <code class="hash-text">0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1</code>
+                                <button class="copy-btn" data-hash="0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Transaction 4 - Failed -->
+                    <div class="transaction-item failed" data-status="failed">
+                        <div class="transaction-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-header">
+                                <h4>कोबी खरेदी - प्रवीण जाधव</h4>
+                                <span class="transaction-amount negative">-₹1,800.00</span>
+                            </div>
+                            <div class="transaction-info">
+                                <span class="transaction-date">२२ नोव्हेंबर २०२४</span>
+                                <span class="transaction-time">०९:३० AM</span>
+                                <span class="transaction-type">खरेदी</span>
+                            </div>
+                            <div class="transaction-status">
+                                <span class="status-badge failed">
+                                    <i class="fas fa-times-circle"></i>
+                                    अयशस्वी
+                                </span>
+                                <button class="action-btn small retry-btn" data-transaction-id="TXN004">
+                                    <i class="fas fa-redo"></i>
+                                    पुन्हा प्रयत्न
+                                </button>
+                            </div>
+                        </div>
+                        <div class="transaction-hash">
+                            <span class="hash-label">ब्लॉकचेन हॅश:</span>
+                            <div class="hash-container">
+                                <code class="hash-text">0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2</code>
+                                <button class="copy-btn" data-hash="0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container">
+                    <button class="load-more-btn" id="loadMoreBtn">
+                        <i class="fas fa-spinner"></i>
+                        अजून व्यवहार पहा
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions Section -->
+        <section class="quick-actions-section">
+            <h2><i class="fas fa-bolt"></i> झटपट कृती</h2>
+            <div class="actions-grid">
+                <button class="action-card primary" id="quickPayCard">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>झटपट पे</h3>
+                    <p>त्वरित पेमेंट करा</p>
+                </button>
+                
+                <button class="action-card escrow" id="escrowPaymentCard">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>एस्क्रो पेमेंट</h3>
+                    <p>सुरक्षित व्यवहार</p>
+                </button>
+                
+                <button class="action-card success" id="withdrawCard">
+                    <i class="fas fa-download"></i>
+                    <h3>पैसे काढा</h3>
+                    <p>बँकेत ट्रान्सफर करा</p>
+                </button>
+                
+                <button class="action-card info" id="transactionHistoryCard">
+                    <i class="fas fa-history"></i>
+                    <h3>पूर्ण इतिहास</h3>
+                    <p>सर्व व्यवहार पहा</p>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Transaction Confirmation Modal -->
+    <div class="modal-overlay" id="transactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">व्यवहार पुष्टी</h3>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="confirmation-details">
+                    <div class="detail-row">
+                        <span class="detail-label">व्यवहार प्रकार:</span>
+                        <span class="detail-value" id="transactionType">पेमेंट</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">रक्कम:</span>
+                        <span class="detail-value" id="transactionAmount">₹2,500.00</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">प्राप्तकर्ता:</span>
+                        <span class="detail-value" id="transactionRecipient">राजेश पाटील</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">व्यवहार फी:</span>
+                        <span class="detail-value" id="transactionFee">₹12.50</span>
+                    </div>
+                    <div class="detail-row total-row">
+                        <span class="detail-label">एकूण:</span>
+                        <span class="detail-value" id="totalAmount">₹2,512.50</span>
+                    </div>
+                </div>
+                
+                <div class="security-info">
+                    <div class="security-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <p>हे व्यवहार ब्लॉकचेनवर सुरक्षित केले जाईल आणि एक अद्वितीय हॅश जनरेट केला जाईल.</p>
+                </div>
+                
+                <div class="confirmation-actions">
+                    <button class="btn secondary" id="cancelTransaction">
+                        <i class="fas fa-times"></i>
+                        रद्द करा
+                    </button>
+                    <button class="btn primary" id="confirmTransaction">
+                        <i class="fas fa-check"></i>
+                        पुष्टी करा
+                    </button>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="blockchain-info">
+                    <i class="fas fa-link"></i>
+                    <span>ब्लॉकचेन नेटवर्कवर सुरक्षित</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Funds Modal -->
+    <div class="modal-overlay" id="addFundsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>फंड जोडा</h3>
+                <button class="close-btn" id="closeAddFundsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="payment-methods">
+                    <div class="payment-method" data-method="upi">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>UPI</span>
+                    </div>
+                    <div class="payment-method" data-method="card">
+                        <i class="fas fa-credit-card"></i>
+                        <span>कार्ड</span>
+                    </div>
+                    <div class="payment-method" data-method="bank">
+                        <i class="fas fa-university"></i>
+                        <span>बँक ट्रान्सफर</span>
+                    </div>
+                    <div class="payment-method" data-method="crypto">
+                        <i class="fab fa-bitcoin"></i>
+                        <span>क्रिप्टो</span>
+                    </div>
+                </div>
+                
+                <div class="amount-input">
+                    <label for="addAmount">रक्कम प्रविष्ट करा (₹)</label>
+                    <input type="number" id="addAmount" placeholder="1000" min="100" max="100000">
+                </div>
+                
+                <div class="add-funds-actions">
+                    <button class="btn secondary" id="cancelAddFunds">
+                        रद्द करा
+                    </button>
+                    <button class="btn primary" id="confirmAddFunds">
+                        फंड जोडा
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div class="modal-overlay" id="withdrawModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>पैसे काढा</h3>
+                <button class="close-btn" id="closeWithdrawModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="withdraw-info">
+                    <p><strong>उपलब्ध शिल्लक:</strong> <span id="availableForWithdraw">₹32,750.00</span></p>
+                    <p><strong>न्यूनतम काढण्याची रक्कम:</strong> ₹500</p>
+                </div>
+                
+                <div class="withdraw-form">
+                    <div class="form-group">
+                        <label for="withdrawAmount">रक्कम (₹)</label>
+                        <input type="number" id="withdrawAmount" placeholder="1000" min="500" max="32750">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bankAccount">बँक खाते</label>
+                        <select id="bankAccount">
+                            <option value="">खाते निवडा</option>
+                            <option value="acc1">SBI ****1234</option>
+                            <option value="acc2">BOI ****5678</option>
+                        </select>
+                    </div>
+                    
+                    <div class="fee-info">
+                        <p><strong>प्रोसेसिंग फी:</strong> ₹25</p>
+                        <p><strong>एकूण मिळणार:</strong> <span id="withdrawTotal">₹0</span></p>
+                    </div>
+                </div>
+                
+                <div class="withdraw-actions">
+                    <button class="btn secondary" id="cancelWithdraw">
+                        रद्द करा
+                    </button>
+                    <button class="btn primary" id="confirmWithdraw">
+                        पैसे काढा
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <i class="toast-icon" id="toastIcon"></i>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner">
+                <i class="fas fa-cog fa-spin"></i>
+            </div>
+            <p>व्यवहार प्रोसेस होत आहे...</p>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="blockchain-payments.js"></script>
+</body>
+</html>

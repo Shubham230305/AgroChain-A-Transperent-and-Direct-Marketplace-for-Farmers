@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroChain - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="background-animation">
+        <div class="floating-icon" style="top: 10%; left: 10%;"><i class="fas fa-seedling"></i></div>
+        <div class="floating-icon" style="top: 20%; left: 80%;"><i class="fas fa-leaf"></i></div>
+        <div class="floating-icon" style="top: 70%; left: 20%;"><i class="fas fa-tractor"></i></div>
+        <div class="floating-icon" style="top: 80%; left: 70%;"><i class="fas fa-wheat-awn"></i></div>
+        <div class="floating-icon" style="top: 30%; left: 50%;"><i class="fas fa-sun"></i></div>
+        <div class="floating-icon" style="top: 60%; left: 90%;"><i class="fas fa-cloud-sun"></i></div>
+    </div>
+
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="mr">मराठी</option>
+            <option value="hi">हिंदी</option>
+        </select>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo -->
+            <div class="logo-section">
+                <div class="logo">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h1 id="appTitle">AgroChain</h1>
+                <p id="appSubtitle">कृषि क्रांतीची सुरुवात</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="loginInput" id="loginInputLabel">Email or Phone Number</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginInput" name="loginInput" required>
+                    </div>
+                    <span class="error-message" id="loginInputError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" id="passwordLabel">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span class="checkmark"></span>
+                        <span id="rememberText">Remember me</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span id="loginBtnText">Login</span>
+                </button>
+            </form>
+
+            <!-- Additional Options -->
+            <div class="additional-options">
+                <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
+                <span class="divider">|</span>
+                <a href="#" class="signup-link" id="signupLink">Create Account</a>
+            </div>
+
+            <!-- Demo Credentials -->
+            <div class="demo-section">
+                <h3 id="demoTitle">Demo Credentials</h3>
+                <div class="demo-credentials">
+                    <div class="demo-item">
+                        <strong>Farmer:</strong> farmer@demo.com / demo123
+                    </div>
+                    <div class="demo-item">
+                        <strong>User:</strong> user@agro.com / agro123
+                    </div>
+                    <div class="demo-item">
+                        <strong>Phone:</strong> 9876543210 / demo123
+                    </div>
+                </div>
+                <button type="button" class="demo-btn" onclick="fillDemoCredentials()">
+                    <i class="fas fa-magic"></i>
+                    <span id="demoBtnText">Use Demo Account</span>
+                </button>
+            </div>
+
+            <!-- Social Login -->
+            <div class="social-login">
+                <p id="socialText">Or login with</p>
+                <div class="social-buttons">
+                    <button type="button" class="social-btn google">
+                        <i class="fab fa-google"></i>
+                        Google
+                    </button>
+                    <button type="button" class="social-btn phone">
+                        <i class="fas fa-mobile-alt"></i>
+                        Phone OTP
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            <i class="fas fa-check-circle"></i>
+            <p id="successText">Login successful! Redirecting...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message">
+            <i class="fas fa-exclamation-circle"></i>
+            <p id="errorText">Invalid credentials. Please try again.</p>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingText">Logging in...</p>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>

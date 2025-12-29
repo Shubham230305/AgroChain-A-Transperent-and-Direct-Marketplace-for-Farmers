@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroChain - Cooperative Marketplace</title>
+    <link rel="stylesheet" href="cooperative-marketplace.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="project-index.html" class="back-btn" title="Back to Project Index" style="margin-right: 15px;">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <i class="fas fa-seedling"></i>
+                <span>AgroChain</span>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="crop-listing.html" class="nav-link">Crops</a>
+                <a href="market-forecast.html" class="nav-link">Forecast</a>
+                <a href="blockchain-payments.html" class="nav-link">Payments</a>
+                <a href="iot-traceability.html" class="nav-link">Traceability</a>
+                <a href="cooperative-marketplace.html" class="nav-link active">Cooperatives</a>
+            </div>
+            <div class="nav-profile">
+                <div class="profile-dropdown">
+                    <button class="profile-btn">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#"><i class="fas fa-user-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header Section -->
+        <section class="header-section">
+            <div class="header-content">
+                <h1><i class="fas fa-users"></i> Cooperative Marketplace</h1>
+                <p>Connect with farmer cooperatives for bulk crop trading</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="createCoopBtn">
+                    <i class="fas fa-plus"></i> Create Cooperative
+                </button>
+                <button class="btn btn-secondary" id="joinCoopBtn">
+                    <i class="fas fa-user-plus"></i> Join Cooperative
+                </button>
+            </div>
+        </section>
+
+        <!-- Stats Overview -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="activeCoops">24</h3>
+                        <p>Active Cooperatives</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalListings">156</h3>
+                        <p>Total Listings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="activeBids">89</h3>
+                        <p>Active Bids</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalVolume">₹2.4M</h3>
+                        <p>Trading Volume</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Marketplace Grid -->
+        <div class="marketplace-grid">
+            <!-- Left Column: Bulk Listings -->
+            <div class="listings-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Bulk Crop Listings</h2>
+                    <div class="filters">
+                        <select id="cropFilter" class="filter-select">
+                            <option value="">All Crops</option>
+                            <option value="wheat">Wheat</option>
+                            <option value="rice">Rice</option>
+                            <option value="corn">Corn</option>
+                            <option value="soybean">Soybean</option>
+                            <option value="cotton">Cotton</option>
+                        </select>
+                        <select id="locationFilter" class="filter-select">
+                            <option value="">All Locations</option>
+                            <option value="maharashtra">Maharashtra</option>
+                            <option value="punjab">Punjab</option>
+                            <option value="gujarat">Gujarat</option>
+                            <option value="rajasthan">Rajasthan</option>
+                        </select>
+                        <select id="quantityFilter" class="filter-select">
+                            <option value="">Any Quantity</option>
+                            <option value="small">10-50 tons</option>
+                            <option value="medium">50-200 tons</option>
+                            <option value="large">200+ tons</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="listings-container" id="listingsContainer">
+                    <!-- Bulk listings will be dynamically generated -->
+                </div>
+            </div>
+
+            <!-- Right Column: Leaderboard & Chat -->
+            <div class="sidebar-section">
+                <!-- Cooperative Leaderboard -->
+                <div class="leaderboard-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-trophy"></i> Top Cooperatives</h3>
+                        <select id="timeframeFilter" class="filter-select">
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    <div class="leaderboard-container" id="leaderboardContainer">
+                        <!-- Leaderboard will be dynamically generated -->
+                    </div>
+                </div>
+
+                <!-- Farmer Group Chat -->
+                <div class="chat-section">
+                    <div class="chat-header">
+                        <h3><i class="fas fa-comments"></i> Farmer Groups Chat</h3>
+                        <div class="chat-controls">
+                            <button class="btn-icon" id="minimizeChat">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chat-groups" id="chatGroups">
+                        <div class="chat-group active" data-group="general">
+                            <div class="group-avatar">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="group-info">
+                                <h4>General Discussion</h4>
+                                <p>Latest: Market trends discussion</p>
+                                <span class="unread-count">3</span>
+                            </div>
+                        </div>
+                        <div class="chat-group" data-group="wheat">
+                            <div class="group-avatar">
+                                <i class="fas fa-wheat-awn"></i>
+                            </div>
+                            <div class="group-info">
+                                <h4>Wheat Cooperatives</h4>
+                                <p>Latest: Quality standards</p>
+                                <span class="unread-count">1</span>
+                            </div>
+                        </div>
+                        <div class="chat-group" data-group="rice">
+                            <div class="group-avatar">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="group-info">
+                                <h4>Rice Cooperatives</h4>
+                                <p>Latest: Harvest planning</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message">
+                            <div class="message-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="message-author">Rajesh Kumar</span>
+                                    <span class="message-time">2 min ago</span>
+                                </div>
+                                <div class="message-text">What are the current market rates for wheat in Punjab?</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chatInput" placeholder="Type your message..." maxlength="500">
+                        <button class="btn-send" id="sendMessage">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Create Cooperative Modal -->
+    <div class="modal" id="createCoopModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> Create Cooperative</h3>
+                <button class="close-btn" id="closeCreateCoop">&times;</button>
+            </div>
+            <form id="createCoopForm">
+                <div class="form-group">
+                    <label for="coopName">Cooperative Name</label>
+                    <input type="text" id="coopName" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="coopLocation">Location</label>
+                    <select id="coopLocation" required>
+                        <option value="">Select Location</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="gujarat">Gujarat</option>
+                        <option value="rajasthan">Rajasthan</option>
+                        <option value="karnataka">Karnataka</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="coopCrops">Primary Crops (select multiple)</label>
+                    <select id="coopCrops" multiple required>
+                        <option value="wheat">Wheat</option>
+                        <option value="rice">Rice</option>
+                        <option value="corn">Corn</option>
+                        <option value="soybean">Soybean</option>
+                        <option value="cotton">Cotton</option>
+                        <option value="sugarcane">Sugarcane</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="coopDescription">Description</label>
+                    <textarea id="coopDescription" rows="3" maxlength="500"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelCreateCoop">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Cooperative</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Join Cooperative Modal -->
+    <div class="modal" id="joinCoopModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> Join Cooperative</h3>
+                <button class="close-btn" id="closeJoinCoop">&times;</button>
+            </div>
+            <div class="coop-search">
+                <input type="text" id="coopSearchInput" placeholder="Search cooperatives...">
+                <button class="btn btn-primary" id="searchCoop">Search</button>
+            </div>
+            <div class="available-coops" id="availableCoops">
+                <!-- Available cooperatives will be listed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Collective Bid Modal -->
+    <div class="modal" id="collectiveBidModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-gavel"></i> Place Collective Bid</h3>
+                <button class="close-btn" id="closeCollectiveBid">&times;</button>
+            </div>
+            <div class="bid-info" id="bidInfo">
+                <!-- Bid information will be populated here -->
+            </div>
+            <form id="collectiveBidForm">
+                <div class="form-group">
+                    <label for="bidAmount">Bid Amount (per quintal)</label>
+                    <input type="number" id="bidAmount" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="bidQuantity">Quantity (quintals)</label>
+                    <input type="number" id="bidQuantity" step="0.1" min="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="bidMessage">Message to Cooperative (optional)</label>
+                    <textarea id="bidMessage" rows="3" maxlength="300"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBid">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Place Bid</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <script src="cooperative-marketplace.js"></script>
+</body>
+</html>

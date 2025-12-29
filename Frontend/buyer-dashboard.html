@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroChain - खरेदीदार डॅशबोर्ड</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="buyer-dashboard.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <a href="project-index.html" class="back-btn" title="Back to Project Index" style="margin-right: 10px;">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <i class="fas fa-leaf"></i>
+                    <span>AgroChain</span>
+                </div>
+            </div>
+            
+            <div class="nav-center">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="पिकांची नावे, प्रकार किंवा स्थान शोधा...">
+                        <button class="search-filters-btn" id="filterToggle">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="nav-right">
+                <div class="cart-container">
+                    <button class="cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                </div>
+                
+                <div class="notification-container">
+                    <button class="notification-btn" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </button>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notification-header">
+                            <h4>सूचना</h4>
+                            <button class="mark-all-read">सर्व वाचलेले</button>
+                        </div>
+                        <div class="notification-list" id="notificationList">
+                            <!-- Notifications will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMyMTk2RjMiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIxNSIgcj0iNiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEwIDMwSDMwVjI1QzMwIDIyIDI4IDIwIDI1IDIwSDE1QzEyIDIwIDEwIDIyIDEwIDI1VjMwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Buyer" class="user-avatar">
+                    <div class="user-info">
+                        <div class="user-name">राजेश शर्मा</div>
+                        <div class="user-role">खरेदीदार</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Filters Panel -->
+    <div class="filters-sidebar" id="filtersSidebar">
+        <div class="filters-header">
+            <h3>फिल्टर्स</h3>
+            <button class="close-filters" id="closeFilters">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="filters-content">
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+                <label class="filter-label">किंमत श्रेणी (₹/किलो)</label>
+                <div class="price-range-container">
+                    <div class="price-inputs">
+                        <input type="number" id="minPrice" placeholder="किमान" min="0">
+                        <span>ते</span>
+                        <input type="number" id="maxPrice" placeholder="कमाल" min="0">
+                    </div>
+                    <div class="price-slider">
+                        <input type="range" id="minPriceRange" min="0" max="500" value="0">
+                        <input type="range" id="maxPriceRange" min="0" max="500" value="500">
+                    </div>
+                    <div class="price-display">
+                        <span>₹<span id="minPriceDisplay">0</span> - ₹<span id="maxPriceDisplay">500</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Freshness Filter -->
+            <div class="filter-group">
+                <label class="filter-label">ताजेपणा</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="freshness" value="today" checked>
+                        <span class="checkmark"></span>
+                        आजचे
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="freshness" value="yesterday" checked>
+                        <span class="checkmark"></span>
+                        कालचे
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="freshness" value="week">
+                        <span class="checkmark"></span>
+                        या आठवड्यातले
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Certifications Filter -->
+            <div class="filter-group">
+                <label class="filter-label">प्रमाणपत्रे</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="certifications" value="organic">
+                        <span class="checkmark"></span>
+                        जैविक प्रमाणित
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="certifications" value="gap">
+                        <span class="checkmark"></span>
+                        GAP प्रमाणित
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" name="certifications" value="fssai">
+                        <span class="checkmark"></span>
+                        FSSAI प्रमाणित
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Traceability Filter -->
+            <div class="filter-group">
+                <label class="filter-label">ट्रेसेबिलिटी</label>
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input type="radio" name="traceability" value="full" checked>
+                        <span class="radio-mark"></span>
+                        पूर्ण ट्रेसेबिलिटी
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="traceability" value="partial">
+                        <span class="radio-mark"></span>
+                        अंशतः ट्रेसेबिलिटी
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="traceability" value="none">
+                        <span class="radio-mark"></span>
+                        ट्रेसेबिलिटी नाही
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Location Filter -->
+            <div class="filter-group">
+                <label class="filter-label">स्थान</label>
+                <select id="locationFilter" class="filter-select">
+                    <option value="">सर्व स्थाने</option>
+                    <option value="pune">पुणे</option>
+                    <option value="nashik">नाशिक</option>
+                    <option value="aurangabad">औरंगाबाद</option>
+                    <option value="kolhapur">कोल्हापूर</option>
+                    <option value="nagpur">नागपूर</option>
+                </select>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="filter-group">
+                <label class="filter-label">प्रकार</label>
+                <select id="categoryFilter" class="filter-select">
+                    <option value="">सर्व प्रकार</option>
+                    <option value="vegetables">भाजीपाला</option>
+                    <option value="fruits">फळे</option>
+                    <option value="grains">धान्य</option>
+                    <option value="spices">मसाले</option>
+                    <option value="pulses">कडधान्य</option>
+                </select>
+            </div>
+            
+            <!-- Filter Actions -->
+            <div class="filter-actions">
+                <button class="btn btn-secondary" id="clearFilters">सर्व साफ करा</button>
+                <button class="btn btn-primary" id="applyFilters">अर्ज करा</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1>उपलब्ध पिके</h1>
+                <div class="header-actions">
+                    <div class="sort-container">
+                        <select id="sortBy" class="sort-select">
+                            <option value="relevance">संबंधितता</option>
+                            <option value="price-low">किंमत - कमी ते जास्त</option>
+                            <option value="price-high">किंमत - जास्त ते कमी</option>
+                            <option value="freshness">ताजेपणा</option>
+                            <option value="rating">रेटिंग</option>
+                            <option value="distance">अंतर</option>
+                        </select>
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="gridView">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" id="listView">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Info -->
+            <div class="results-info">
+                <span id="resultsCount">१२ पिके सापडली</span>
+                <span id="activeFilters" class="active-filters"></span>
+            </div>
+            
+            <!-- Crop Listings Grid -->
+            <div class="crop-grid" id="cropGrid">
+                <!-- Crop cards will be populated here -->
+            </div>
+            
+            <!-- Load More -->
+            <div class="load-more-container">
+                <button class="btn btn-outline" id="loadMore">
+                    <i class="fas fa-spinner"></i>
+                    अजून पहा
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>माझी कार्ट</h3>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be populated here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>एकूण:</span>
+                <span id="cartTotal">₹0</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">
+                चेकआउट करा
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Actions Menu -->
+    <div class="quick-actions">
+        <button class="quick-action-btn" id="myOrdersBtn">
+            <i class="fas fa-box"></i>
+            <span>माझ्या ऑर्डर</span>
+        </button>
+        <button class="quick-action-btn" id="paymentHistoryBtn">
+            <i class="fas fa-history"></i>
+            <span>पेमेंट इतिहास</span>
+        </button>
+        <button class="quick-action-btn" id="savedSearchesBtn">
+            <i class="fas fa-bookmark"></i>
+            <span>जतन केलेले</span>
+        </button>
+        <button class="quick-action-btn" id="compareBtn">
+            <i class="fas fa-balance-scale"></i>
+            <span>तुलना</span>
+        </button>
+    </div>
+
+    <!-- Modals -->
+    <!-- Buy Now Modal -->
+    <div class="modal" id="buyNowModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>खरेदी करा</h3>
+                <button class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="crop-summary">
+                    <img id="modalCropImage" src="" alt="">
+                    <div class="crop-details">
+                        <h4 id="modalCropName"></h4>
+                        <p id="modalCropSeller"></p>
+                        <p id="modalCropPrice"></p>
+                    </div>
+                </div>
+                <form id="buyForm">
+                    <div class="form-group">
+                        <label for="quantity">प्रमाण (किलो)</label>
+                        <input type="number" id="quantity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="deliveryDate">डिलिव्हरी तारीख</label>
+                        <input type="date" id="deliveryDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="deliveryLocation">डिलिव्हरी स्थान</label>
+                        <input type="text" id="deliveryLocation" required>
+                    </div>
+                    <div class="total-price">
+                        <strong>एकूण किंमत: <span id="totalPrice">₹0</span></strong>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBuy">रद्द करा</button>
+                        <button type="submit" class="btn btn-primary">ऑर्डर पाठवा</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Negotiate Price Modal -->
+    <div class="modal" id="negotiateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>किंमत चर्चा करा</h3>
+                <button class="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="price-negotiation">
+                    <div class="current-price">
+                        <p>सध्याची किंमत: <strong id="currentPrice"></strong></p>
+                    </div>
+                    <form id="negotiateForm">
+                        <div class="form-group">
+                            <label for="offeredPrice">तुमची ऑफर (₹/किलो)</label>
+                            <input type="number" id="offeredPrice" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">प्रमाण (किलो)</label>
+                            <input type="number" id="negotiateQuantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">कारण</label>
+                            <textarea id="reason" rows="3" placeholder="तुमची ऑफर का योग्य आहे?"></textarea>
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="btn btn-secondary" id="cancelNegotiate">रद्द करा</button>
+                            <button type="submit" class="btn btn-primary">ऑफर पाठवा</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Scripts -->
+    <script src="buyer-dashboard.js"></script>
+</body>
+</html>

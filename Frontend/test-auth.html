@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Authentication</title>
+</head>
+<body>
+    <h1>Authentication Test</h1>
+    <div id="status"></div>
+    <button onclick="testLogin()">Test Login</button>
+    <button onclick="testLogout()">Test Logout</button>
+    <button onclick="checkStatus()">Check Status</button>
+    <br><br>
+    <a href="project-index.html">Go to Main Hub</a>
+    
+    <script>
+        function testLogin() {
+            localStorage.setItem('agrochain-current-user', 'test-user');
+            document.getElementById('status').innerHTML = '<p style="color: green;">Logged in as test-user</p>';
+        }
+        
+        function testLogout() {
+            localStorage.removeItem('agrochain-current-user');
+            document.getElementById('status').innerHTML = '<p style="color: red;">Logged out</p>';
+        }
+        
+        function checkStatus() {
+            const user = localStorage.getItem('agrochain-current-user');
+            if (user) {
+                document.getElementById('status').innerHTML = '<p style="color: green;">Current user: ' + user + '</p>';
+            } else {
+                document.getElementById('status').innerHTML = '<p style="color: red;">No user logged in</p>';
+            }
+        }
+        
+        // Check status on load
+        checkStatus();
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>पिके सूची - AgroChain</title>
+    <link rel="stylesheet" href="crop-listing.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="back-btn" onclick="window.location.href='project-index.html'">←</button>
+                <h1 class="nav-title">पिके सूचीबद्ध करा</h1>
+            </div>
+            <div class="nav-right">
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Q0FGNTIiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xMiA4QzEzLjEgOCAxNCA3LjEgMTQgNkMxNCA0LjkgMTMuMSA0IDEyIDRDMTAuOSA0IDEwIDQuOSAxMCA2QzEwIDcuMSAxMC45IDggMTIgOFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xMiAxNEM4LjEzIDE0IDUgMTYuMTMgNSAyMEg3QzcgMTcuMjQgOS4yNCAxNSAxMiAxNUMxNC43NiAxNSAxNyAxNy4yNCAxNyAyMEgxOUMxOSAxNi4xMyAxNS44NyAxNCAxMiAxNFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo8L3N2Zz4K" alt="Profile" class="profile-img">
+                    <span class="user-name">राहुल पाटील</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="form-container">
+            <form id="cropListingForm" class="crop-form">
+                <!-- Form Header -->
+                <div class="form-header">
+                    <h2>तुमची पिके माहिती भरा</h2>
+                    <p class="form-subtitle">ताजी आणि गुणवत्तापूर्ण पिके विक्रीसाठी सूचीबद्ध करा</p>
+                </div>
+
+                <!-- Crop Photo Upload -->
+                <div class="form-group">
+                    <label class="form-label">पिकाचा फोटो अपलोड करा *</label>
+                    <div class="photo-upload-container">
+                        <input type="file" id="cropPhoto" accept="image/*" class="photo-input" required>
+                        <div class="photo-upload-area" id="photoUploadArea">
+                            <div class="upload-icon">📷</div>
+                            <p class="upload-text">फोटो अपलोड करण्यासाठी क्लिक करा</p>
+                            <p class="upload-subtext">JPG, PNG स्वरूपात, 5MB पर्यंत</p>
+                        </div>
+                        <div class="photo-preview" id="photoPreview" style="display: none;">
+                            <img id="previewImage" src="" alt="Crop Preview">
+                            <button type="button" class="remove-photo" id="removePhoto">✕</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Crop Name -->
+                <div class="form-group">
+                    <label class="form-label" for="cropName">पिकाचे नाव *</label>
+                    <select id="cropName" class="form-select" required>
+                        <option value="">पिक निवडा</option>
+                        <option value="tomato">टोमॅटो</option>
+                        <option value="potato">बटाटा</option>
+                        <option value="onion">कांदा</option>
+                        <option value="cabbage">कोबी</option>
+                        <option value="cauliflower">फ्लॉवर</option>
+                        <option value="brinjal">वांगे</option>
+                        <option value="spinach">पालक</option>
+                        <option value="carrot">गाजर</option>
+                        <option value="radish">मुळा</option>
+                        <option value="bitter-gourd">कारले</option>
+                        <option value="bottle-gourd">दुधी भोपळा</option>
+                        <option value="okra">भेंडी</option>
+                        <option value="chili">मिरची</option>
+                        <option value="coriander">कोथिंबीर</option>
+                        <option value="other">इतर</option>
+                    </select>
+                </div>
+
+                <!-- Quantity -->
+                <div class="form-group">
+                    <label class="form-label" for="quantity">एकूण प्रमाण *</label>
+                    <div class="quantity-input-group">
+                        <input type="number" id="quantity" class="form-input" placeholder="उदा: 100" min="1" required>
+                        <select id="unit" class="unit-select" required>
+                            <option value="kg">किलो</option>
+                            <option value="quintal">क्विंटल</option>
+                            <option value="ton">टन</option>
+                            <option value="dozen">डझन</option>
+                            <option value="crate">पेटी</option>
+                            <option value="basket">टोपली</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Price per kg -->
+                <div class="form-group">
+                    <label class="form-label" for="pricePerKg">दर प्रति किलो *</label>
+                    <div class="price-input-group">
+                        <span class="currency-symbol">₹</span>
+                        <input type="number" id="pricePerKg" class="form-input" placeholder="उदा: 25" min="1" step="0.01" required>
+                        <span class="price-unit">/ किलो</span>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="form-group">
+                    <label class="form-label" for="location">स्थान *</label>
+                    <div class="location-input-group">
+                        <input type="text" id="location" class="form-input" placeholder="उदा: पुणे, महाराष्ट्र" required>
+                        <button type="button" class="location-btn" id="getLocation">📍</button>
+                    </div>
+                    <small class="location-help">तुमचे स्थान स्वयंचलित मिळवण्यासाठी मोबाईल आयकॉन क्लिक करा</small>
+                </div>
+
+                <!-- Harvest Date -->
+                <div class="form-group">
+                    <label class="form-label" for="harvestDate">काढणीची तारीख *</label>
+                    <input type="date" id="harvestDate" class="form-input" required>
+                    <small class="date-help">ताजेपणा दाखवण्यासाठी अचूक तारीख भरा</small>
+                </div>
+
+                <!-- IoT Storage/Transport Status -->
+                <div class="form-group">
+                    <label class="form-label" for="storageStatus">साठवण/वाहतूक स्थिती (IoT सेन्सर)</label>
+                    <select id="storageStatus" class="form-select">
+                        <option value="">स्थिती निवडा</option>
+                        <option value="optimal">इष्टतम - तापमान: 18°C, आर्द्रता: 65%</option>
+                        <option value="good">चांगली - तापमान: 20°C, आर्द्रता: 70%</option>
+                        <option value="warning">सावधान - तापमान: 23°C, आर्द्रता: 75%</option>
+                        <option value="critical">गंभीर - तापमान: 26°C, आर्द्रता: 80%</option>
+                        <option value="no-sensor">सेंसर नाही</option>
+                    </select>
+                    <div class="iot-status-display" id="iotStatusDisplay" style="display: none;">
+                        <div class="sensor-data">
+                            <span class="sensor-item">🌡️ <span id="temperature">--</span>°C</span>
+                            <span class="sensor-item">💧 <span id="humidity">--</span>%</span>
+                            <span class="sensor-item">📊 <span id="quality">--</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="form-group">
+                    <label class="form-label" for="additionalDetails">अधिक माहिती (ऐच्छिक)</label>
+                    <textarea id="additionalDetails" class="form-textarea" placeholder="तुमच्या पिकांबद्दल विशेष माहिती, गुणवत्ता, वैशिष्ट्ये इत्यादी..."></textarea>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-cancel" onclick="window.location.href='project-index.html'">रद्द करा</button>
+                    <button type="submit" class="btn btn-submit">पिके सूचीबद्ध करा</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>पुष्टीकरण</h3>
+                <button type="button" class="close-btn" id="closeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-icon">✅</div>
+                <h4>तुमची पिके यशस्वीरित्या सूचीबद्ध झाली!</h4>
+                <p>तुमची माहिती आमच्या सिस्टममध्ये जतन करण्यात आली आहे. खरेदीदार लवकरच तुमच्या पिकांसाठी संपर्क करतील.</p>
+                <div class="confirmation-details" id="confirmationDetails">
+                    <!-- Dynamic content will be added here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="addAnotherCrop">आणखी पिके सूचीबद्ध करा</button>
+                <button type="button" class="btn btn-primary" id="goToDashboard">डॅशबोर्डवर जा</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <span class="toast-icon" id="toastIcon"></span>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script src="crop-listing.js"></script>
+</body>
+</html>

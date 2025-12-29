@@ -1,117 +1,79 @@
 # 🌾 AgroChain
 ### A Transparent and Direct Marketplace for Farmers
 
-AgroChain is a decentralized agricultural marketplace designed to eliminate intermediaries and create a fair, transparent, and secure trading ecosystem for farmers and buyers. By leveraging **Blockchain**, **Smart Contracts**, **IoT**, and **AI-driven analytics**, AgroChain ensures fair pricing, secure payments, real-time traceability, and predictive market insights.
+AgroChain is a blockchain-based agricultural marketplace that connects farmers directly with buyers, ensuring transparent pricing, secure smart contract payments, and real-time produce traceability using IoT. It also leverages AI-driven price forecasting and market insights to empower farmers and build trust across the agricultural supply chain.
 
 ---
 
 ## 🚜 Problem Statement
-Traditional agricultural supply chains suffer from:
-- Exploitation by middlemen
-- Lack of price transparency
-- Delayed or failed payments
-- No traceability of produce quality
-- Limited market access for small farmers
-
-AgroChain addresses these challenges through a technology-driven, community-focused solution.
+Traditional agricultural supply chains suffer from exploitation by intermediaries, lack of price transparency, delayed payments, and no reliable traceability of produce quality. AgroChain addresses these challenges using modern decentralized technologies.
 
 ---
 
 ## 🎯 Objectives
-- Enable **direct transactions** between farmers and buyers
-- Automate **secure escrow-based payments** using smart contracts
-- Provide **AI-powered price prediction & anomaly detection**
-- Ensure **real-time traceability** using IoT sensors
-- Promote **digital inclusivity** via SMS support and village ambassadors
+- Enable direct farmer-to-buyer transactions
+- Automate secure payments using blockchain smart contracts
+- Provide AI-based price prediction and anomaly detection
+- Ensure real-time crop tracking using IoT
+- Support digital inclusion via SMS and village ambassadors
 
 ---
 
 ## 🧩 System Architecture
-AgroChain follows a **multi-layer architecture**:
-
-1. **User Layer**
-   - Farmers (Mobile App / SMS)
-   - Buyers (Web / Mobile App)
-   - Village Ambassadors
-   - Administrators
-
-2. **Application Layer**
-   - Smart Contracts
-   - Escrow & Payment Module
-   - Authentication & Verification
-   - Dashboards
-
-3. **Blockchain Layer**
-   - Hyperledger Fabric (Permissioned Blockchain)
-   - Immutable transaction ledger
-   - Audit & traceability support
-
-4. **IoT & AI Layer**
-   - Sensors (Temperature, Humidity, GPS, RFID)
-   - Hybrid ARIMA–LSTM price forecasting
-   - Transformer-based anomaly detection
-   - IPFS for off-chain data storage
+AgroChain uses a multi-layer architecture consisting of:
+- User Layer (Farmers, Buyers, Admins)
+- Application Layer (Smart Contracts, Escrow, Dashboards)
+- Blockchain Layer (Hyperledger Fabric)
+- IoT & AI Analytics Layer
 
 ---
 
-## 🔐 Key Features
-- 🔗 Blockchain-based secure transactions
-- 💰 Automated escrow payments via smart contracts
-- 📦 End-to-end produce traceability
-- 📈 AI-based price prediction & market intelligence
-- 📱 User-friendly mobile & web interfaces
-- 🌍 Multilingual support (English, Hindi, Marathi)
-- 📩 SMS support for farmers without smartphones
+## 📸 Interface Snapshots
+
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <b>Homepage</b><br>
+      <img src="https://github.com/Shubham230305/AgroChain-A-Transperent-and-Direct-Marketplace-for-Farmers/blob/main/Snapshots/Homepage.jpg" width="400"/>
+    </td>
+    <td align="center">
+      <b>Dashboard</b><br>
+      <img src="https://github.com/Shubham230305/AgroChain-A-Transperent-and-Direct-Marketplace-for-Farmers/blob/main/Snapshots/Dashboard.jpg" width="400"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <b>Tracking & Traceability</b><br>
+      <img src="https://github.com/Shubham230305/AgroChain-A-Transperent-and-Direct-Marketplace-for-Farmers/blob/main/Snapshots/Tracking.jpg" width="400"/>
+    </td>
+    <td align="center">
+      <b>Market Forecasting</b><br>
+      <img src="https://github.com/Shubham230305/AgroChain-A-Transperent-and-Direct-Marketplace-for-Farmers/blob/main/Snapshots/Forecasting.jpg" width="400"/>
+    </td>
+  </tr>
+</table>
 
 ---
 
 ## 🛠️ Technology Stack
 
-### Blockchain
-- Hyperledger Fabric
-- Smart Contracts
-
-### Backend
-- Node.js
-- JavaScript
-- MongoDB
-
-### Frontend
-- React.js (Web)
-- Flutter / React Native (Mobile)
-
-### AI & Analytics
-- Python
-- ARIMA–LSTM Models
-- Transformer Models
-- TensorFlow / Scikit-learn
-
-### IoT
-- DHT11 / DHT22 Sensors
-- GPS Modules
-- RFID / NFC
-- MQTT Protocol
-
-### Storage
-- IPFS (Off-chain data)
-- Blockchain metadata anchoring
+**Blockchain:** Hyperledger Fabric  
+**Backend:** Node.js, JavaScript  
+**Frontend:** React.js / Flutter  
+**Database:** MongoDB  
+**AI Models:** ARIMA–LSTM, Transformer  
+**IoT:** DHT Sensors, GPS, RFID  
+**Storage:** IPFS
 
 ---
 
-## ⚙️ Hardware Requirements
-- Android Smartphone
-- IoT Sensors (Temperature, Humidity, GPS)
-- Server / Cloud Infrastructure
-- Internet / Mobile Data Connection
-
----
-
-## 🚀 Future Enhancements
-- Advanced AI models for crop-specific forecasting
+## 🚀 Future Scope
+- Advanced AI-based crop prediction
 - Government system integration (e-Mandi, MSP)
-- Expanded SMS and voice-based interactions
-- Improved scalability and cross-chain interoperability
-- Sustainability-based incentive mechanisms
+- SMS & voice-based farmer interaction
+- Large-scale deployment and optimization
 
 ---
 
